@@ -8,7 +8,7 @@
 <body>
     <h1><strong>Buat Account Baru!</strong></h1>
     <h2><strong>Sign Up Form</strong></h2>
-    <form action="welcome.html" method="POST">
+    <form action="/welcome" method="POST">
         <label for="first-name">First name:</label><br><br>
         <input type="Text"><br><br>
         <label for="last-name">Last name:</label><br><br>
