@@ -19,7 +19,7 @@
     </ul>
     <ol>
         <li>Mengunjungi Website ini</li>
-        <li>Mendaftar di <a href="localhost:8000/register">Form Sign Up</a></li>
+        <li>Mendaftar di <a href="/register">Form Sign Up</a></li>
         <li>Selesai!</li>
     </ol>
 </body>

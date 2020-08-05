@@ -9,10 +9,11 @@
     <h1><strong>Buat Account Baru!</strong></h1>
     <h2><strong>Sign Up Form</strong></h2>
     <form action="/welcome" method="POST">
+        @csrf
         <label for="first-name">First name:</label><br><br>
-        <input type="Text"><br><br>
+        <input type="Text" name="first-name"><br><br>
         <label for="last-name">Last name:</label><br><br>
-        <input type="Text"><br><br>
+        <input type="Text" name="last-name"><br><br>
         <label for="gender">Gender:</label><br><br>
         <input type="radio" id="male" name="gender" value="male">
         <label for="male">Male</label><br>

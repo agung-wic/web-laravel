@@ -11,6 +11,11 @@
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('/register','PerkenalanController@register');
+
+Route::post('/welcome','PerkenalanController@welcome');

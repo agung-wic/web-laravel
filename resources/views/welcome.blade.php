@@ -6,7 +6,7 @@
     <title>Laravel Dasar</title>
 </head>
 <body>
-    <h1><strong>SELAMAT DATANG!</strong></h1>
+    <h1><strong>SELAMAT DATANG {{$nama}}!</strong></h1>
     <h2><strong>Terima kasih telah bergabung di Sanberbook. Social Media kita bersama!</strong></h2>
 </body>
 </html>
