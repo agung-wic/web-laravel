@@ -13,9 +13,9 @@
 
 
 Route::get('/', function () {
-    return view('index');
+    return view('items.index');
 });
 
-Route::get('/register','PerkenalanController@register');
-
-Route::post('/welcome','PerkenalanController@welcome');
+Route::get('/data-tables', function(){
+    return view('items.data');
+});
