@@ -17,8 +17,6 @@ class AddJawabanTepatIdToPertanyaan extends Migration
             //
             $table->unsignedBigInteger('jawaban_tepat_id')->nullable();
             $table->unsignedBigInteger('profil_id')->nullable();
-
-            $table->foreign('jawaban_tepat_id')->references('id')->on('jawaban');
             $table->foreign('profil_id')->references('id')->on('profil');
         });
     }
@@ -32,7 +30,7 @@ class AddJawabanTepatIdToPertanyaan extends Migration
     {
         Schema::table('pertanyaan', function (Blueprint $table) {
             //
-            $table->dropForeign(['profil_id'],['jawaban_tepat_id']);
+            $table->dropForeign(['profil_id']);
             $table->dropColumn(['profil_id'],['jawaban_tepat_id']);
         });
     }
