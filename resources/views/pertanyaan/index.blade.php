@@ -8,6 +8,12 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <a class="btn btn-primary mb-2" href="/pertanyaan/create">Buat pertanyaan baru</a>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -18,16 +24,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Update software</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-danger">55%</span></td>
-                        </tr>
+                        @forelse ($pertanyaan as $key => $tanya)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $tanya->judul }}</td>
+                                <td>{{ $tanya->isi }}</td>
+                                <td style="display: flex">
+                                    <a href="/pertanyaan/{{ $tanya->id }}" class="btn btn-primary btn-sm">show</a>
+                                    <a href="/pertanyaan/{{ $tanya->id }}/edit" class="btn btn-default btn-sm">edit</a>
+                                    <form action="/pertanyaan/{{$tanya->id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" value="delete" class="btn btn-danger btn-sm">
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" align="center">Tidak ada pertanyaan</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
