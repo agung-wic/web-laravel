@@ -16,6 +16,8 @@ Route::get('/', function () {
     return view('items.index');
 });
 
-Route::get('/data-tables', function(){
-    return view('items.data');
-});
+Route::get('/pertanyaan/create','PertanyaanController@create');
+
+Route::post('/pertanyaan','PertanyaanController@store');
+
+Route::get('/pertanyaan','PertanyaanController@index');
