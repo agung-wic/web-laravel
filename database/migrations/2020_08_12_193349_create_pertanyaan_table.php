@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddJawabanTepatIdToPertanyaan extends Migration
+class CreatePertanyaanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class AddJawabanTepatIdToPertanyaan extends Migration
      */
     public function up()
     {
-        Schema::table('pertanyaan', function (Blueprint $table) {
-            //
+        Schema::create('pertanyaan', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('judul',45);
+            $table->string('isi',255);
+            $table->date('tanggal_dibuat');
+            $table->date('tanggal_diprbarui');
             $table->unsignedBigInteger('jawaban_tepat_id')->nullable();
             $table->unsignedBigInteger('profil_id')->nullable();
-            $table->foreign('profil_id')->references('id')->on('profil');
+            $table->foreign('profil_id')->references('id')->on('users');
         });
     }
 
@@ -31,7 +35,7 @@ class AddJawabanTepatIdToPertanyaan extends Migration
         Schema::table('pertanyaan', function (Blueprint $table) {
             //
             $table->dropForeign(['profil_id']);
-            $table->dropColumn(['profil_id'],['jawaban_tepat_id']);
         });
+        Schema::dropIfExists('pertanyaan');
     }
 }

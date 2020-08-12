@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPertanyaanIdToJawaban extends Migration
+class CreateKomentarPertanyaanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class AddPertanyaanIdToJawaban extends Migration
      */
     public function up()
     {
-        Schema::table('jawaban', function (Blueprint $table) {
-            //
+        Schema::create('komentar_pertanyaan', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('isi',255);
+            $table->date('tanggal_dibuat');
             $table->unsignedBigInteger('pertanyaan_id')->nullable();
             $table->unsignedBigInteger('profil_id')->nullable();
-
             $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan');
-            $table->foreign('profil_id')->references('id')->on('profil');
+            $table->foreign('profil_id')->references('id')->on('users');
         });
     }
 
@@ -30,10 +31,10 @@ class AddPertanyaanIdToJawaban extends Migration
      */
     public function down()
     {
-        Schema::table('jawaban', function (Blueprint $table) {
+        Schema::table('komentar_pertanyaan', function (Blueprint $table) {
             //
             $table->dropForeign(['profil_id'],['pertanyaan_id']);
-            $table->dropColumn(['profil_id'],['pertanyaan_id']);
         });
+        Schema::dropIfExists('komentar_pertanyaan');
     }
 }

@@ -6,10 +6,15 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Pertanyaan;
+use Illuminate\Support\Facades\Auth;
 
 class PertanyaanController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['create','store','edit','destroy','update']);
+    }
     public function create (){
         return view('pertanyaan.create');
     }
@@ -25,6 +30,7 @@ class PertanyaanController extends Controller
             "isi"=>$request["isi"], 
             "tanggal_dibuat"=>Carbon::now(),
             "tanggal_diprbarui"=>Carbon::now(),
+            "profil_id"=>Auth::id(),
         ]);
         return redirect('/pertanyaan')->with('success','Pertanyaan berhasil disimpan!');
     }

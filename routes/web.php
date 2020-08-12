@@ -13,7 +13,7 @@
 
 
 Route::get('/', function () {
-    return view('items.index');
+    return view('welcome');
 });
 
 // Route::get('/pertanyaan/create','PertanyaanController@create');
@@ -31,3 +31,6 @@ Route::get('/', function () {
 // Route::delete('/pertanyaan/{pertanyaan_id}','PertanyaanController@destroy');
 
 Route::resource('/pertanyaan', 'PertanyaanController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

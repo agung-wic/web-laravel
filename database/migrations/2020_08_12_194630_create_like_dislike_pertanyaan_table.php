@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPertanyaanIdToKomentarPertanyaan extends Migration
+class CreateLikeDislikePertanyaanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class AddPertanyaanIdToKomentarPertanyaan extends Migration
      */
     public function up()
     {
-        Schema::table('komentar_pertanyaan_', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('pertanyaan_id')->nullable();
-            $table->unsignedBigInteger('profil_id')->nullable();
+        Schema::create('like_dislike_pertanyaan', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('pertanyaan_id');
+            $table->unsignedBigInteger('profil_id');
+            $table->integer('poin');
             $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan');
-            $table->foreign('profil_id')->references('id')->on('profil');
+            $table->foreign('profil_id')->references('id')->on('users');
         });
     }
 
@@ -29,10 +30,11 @@ class AddPertanyaanIdToKomentarPertanyaan extends Migration
      */
     public function down()
     {
-        Schema::table('komentar_pertanyaan_', function (Blueprint $table) {
+        Schema::table('like_dislike_pertanyaan', function (Blueprint $table) {
             //
             $table->dropForeign(['profil_id'],['pertanyaan_id']);
-            $table->dropColumn(['profil_id'],['pertanyaan_id']);
         });
+        Schema::dropIfExists('like_dislike_pertanyaan');
+        
     }
 }

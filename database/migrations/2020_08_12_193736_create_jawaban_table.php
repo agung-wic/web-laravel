@@ -18,6 +18,11 @@ class CreateJawabanTable extends Migration
             $table->string('isi',255);
             $table->date('tanggal_dibuat');
             $table->date('tanggal_diperbarui');
+            $table->unsignedBigInteger('pertanyaan_id')->nullable();
+            $table->unsignedBigInteger('profil_id')->nullable();
+
+            $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan');
+            $table->foreign('profil_id')->references('id')->on('users');
         });
     }
 
@@ -28,6 +33,11 @@ class CreateJawabanTable extends Migration
      */
     public function down()
     {
+        Schema::table('jawaban', function (Blueprint $table) {
+            //
+            $table->dropForeign(['profil_id'],['pertanyaan_id']);
+        });  
         Schema::dropIfExists('jawaban');
+          
     }
 }

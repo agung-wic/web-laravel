@@ -18,6 +18,8 @@ class CreateLikeDislikeJawabanTable extends Migration
             $table->unsignedBigInteger('jawaban_id');
             $table->unsignedBigInteger('profil_id');
             $table->integer('poin');
+            $table->foreign('jawaban_id')->references('id')->on('jawaban');
+            $table->foreign('profil_id')->references('id')->on('users');
         });
     }
 
@@ -28,6 +30,12 @@ class CreateLikeDislikeJawabanTable extends Migration
      */
     public function down()
     {
+        Schema::table('like_dislike_jawaban', function (Blueprint $table) {
+            //
+            $table->dropForeign(['profil_id'],['jawaban_id']);
+        });
+        
         Schema::dropIfExists('like_dislike_jawaban');
+        
     }
 }
